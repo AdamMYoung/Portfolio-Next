@@ -48,11 +48,11 @@ const HomeAboutMe = () => {
                 <IconisedText className="" src={spiderWeb}>
                     web
                 </IconisedText>{' '}
-                using React. I try to make everything I build <FireText>blazing fast</FireText> and accessible, always
-                looking for ways to improve.
+                using React. I try to make everything I build <FireText>blazing fast</FireText> and accessible, and
+                I&apos;m always looking for ways to improve.
             </InfoBlockDescription>
             <InfoBlockDescription>
-                I&apos;ve always got projects in-progress, some past examples being{' '}
+                There&apos;s usually a project in-progress, with some past examples being{' '}
                 <a className="underline" href="https://blurdle.aydev.uk" target="_blank">
                     Blurdle
                 </a>{' '}
