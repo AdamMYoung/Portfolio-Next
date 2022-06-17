@@ -10,6 +10,6 @@ export type FCC<T = {}> = FC<
 >;
 
 /**
- * Like and FCC, but takes a tag parameter to pull default HTML attributes from the provided tag.
+ * Like FCC, but takes a tag parameter to pull default HTML attributes from the provided tag.
  */
 export type FCCTag<T extends ElementType<any>> = FCC<ComponentPropsWithoutRef<T>>;

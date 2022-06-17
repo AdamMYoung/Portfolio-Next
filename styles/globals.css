@@ -15,7 +15,15 @@
         @apply bg-gradient-to-r text-transparent bg-clip-text from-yellow-500 to-green-500;
     }
 
+    .text-gradient-orange-blue {
+        @apply bg-gradient-to-r text-transparent bg-clip-text from-orange-500 to-blue-500;
+    }
+
     .text-gradient-darkblue-blue {
         @apply bg-gradient-to-r text-transparent bg-clip-text from-blue-800 to-blue-500;
     }
+}
+
+.min-h-half-screen {
+    height: 50vh;
 }
