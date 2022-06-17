@@ -56,7 +56,7 @@ const HomeAboutMe = () => {
                 <a className="underline" href="https://blurdle.aydev.uk" target="_blank">
                     Blurdle
                 </a>{' '}
-                or
+                or{' '}
                 <a className="underline" href="https://ebay-heuristics-v2.netlify.app/" target="_blank">
                     eBay Heuristics
                 </a>
