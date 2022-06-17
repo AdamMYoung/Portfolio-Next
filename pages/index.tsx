@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import { NextPage } from 'next';
 
 import React from 'react';
@@ -15,10 +16,10 @@ const HomeHero = () => {
         <Hero>
             <HeroTextBlock>
                 <HeroText>
-                    Hi, I'm <span className="text-gradient-blue-purple">Adam Young</span>!
+                    Hi, I&apos;m <span className="text-gradient-blue-purple">Adam Young</span>!
                 </HeroText>
                 <HeroText className="leading-12 ">
-                    I'm a <span className="text-gradient-yellow-green">Software Engineer</span> working at{' '}
+                    I&apos;m a <span className="text-gradient-yellow-green">Software Engineer</span> working at{' '}
                     <a
                         href="https://checkout.com"
                         rel="noreferrer"
@@ -51,12 +52,11 @@ const HomeAboutMe = () => {
                 looking for ways to improve.
             </InfoBlockDescription>
             <InfoBlockDescription>
-                I've always got projects in-progress, some past examples being{' '}
-                {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                I&apos;ve always got projects in-progress, some past examples being{' '}
                 <a className="underline" href="https://blurdle.aydev.uk" target="_blank">
                     Blurdle
                 </a>{' '}
-                or {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                or
                 <a className="underline" href="https://ebay-heuristics-v2.netlify.app/" target="_blank">
                     eBay Heuristics
                 </a>
