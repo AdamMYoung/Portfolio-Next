@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .text-gradient-blue-purple {
+        @apply bg-gradient-to-r text-transparent bg-clip-text from-blue-500 to-purple-500;
+    }
+
+    .text-gradient-purple-blue {
+        @apply bg-gradient-to-r text-transparent bg-clip-text from-purple-500 to-blue-500;
+    }
+
+    .text-gradient-yellow-green {
+        @apply bg-gradient-to-r text-transparent bg-clip-text from-yellow-500 to-green-500;
+    }
+
+    .text-gradient-darkblue-blue {
+        @apply bg-gradient-to-r text-transparent bg-clip-text from-blue-800 to-blue-500;
+    }
+}
