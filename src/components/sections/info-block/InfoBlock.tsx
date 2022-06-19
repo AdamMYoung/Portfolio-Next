@@ -3,7 +3,7 @@ import { FCCTag } from '../../../types';
 
 export const InfoBlock: FCCTag<'section'> = ({ children, className, ...rest }) => {
     return (
-        <div className="min-h-half-screen">
+        <div className="pb-96">
             <section className={classNames('grid p-4 gap-4 container mx-auto', className)} {...rest}>
                 {children}
             </section>

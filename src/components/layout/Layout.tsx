@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { FCC } from '../../types';
 
 export const Layout: FCC = ({ children }) => {

@@ -9,6 +9,8 @@ import { Hero, HeroText, HeroTextBlock } from '../src/components/sections/hero';
 import { InfoBlock, InfoBlockDescription, InfoBlockTitle } from '../src/components/sections/info-block';
 import { Layout } from '../src/components/layout';
 import { BlogPost, getContentRepository } from '../src/utils/content';
+import { BlogCard } from '../src/components/sections/blog-card';
+import { getHoverColorFromNumber } from '../src/utils/color';
 
 type HomeProps = {
     blogPosts: BlogPost[];
@@ -76,7 +78,11 @@ const HomeBlog: FC<{ blogPosts: BlogPost[] }> = ({ blogPosts }) => {
         <FadeIn>
             <InfoBlock>
                 <InfoBlockTitle className="text-gradient-blue-purple pb-2">Blog</InfoBlockTitle>
-                <div></div>
+                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                    {blogPosts.map((b, i) => (
+                        <BlogCard key={b.slug} blog={b} color={getHoverColorFromNumber(i)} />
+                    ))}
+                </div>
             </InfoBlock>
         </FadeIn>
     );
@@ -94,9 +100,9 @@ const Home: NextPage<HomeProps> = ({ blogPosts }) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = () => {
+export const getStaticProps: GetStaticProps = async () => {
     const repository = getContentRepository();
-    const blogPosts = repository.getBlogs();
+    const blogPosts = await repository.getBlogs({ limit: 3, order: 'sys.createdAt' });
 
     return {
         props: {
