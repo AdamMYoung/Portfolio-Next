@@ -80,7 +80,7 @@ const HomeBlog: FC<{ blogPosts: BlogPost[] }> = ({ blogPosts }) => {
                 <InfoBlockTitle className="text-gradient-blue-purple pb-2">Blog</InfoBlockTitle>
                 <div className="snap-x flex md:snap-none overflow-hidden overflow-x-auto md:overflow-auto md:overflow-x-auto md:grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                     {blogPosts.map((b, i) => (
-                        <div className="min-w-half-screen md:min-w-0 md:w-auto" key={b.slug}>
+                        <div className="min-w-90vw md:min-w-0 md:w-auto" key={b.slug}>
                             <BlogCard blog={b} color={getHoverColorFromNumber(i)} />
                         </div>
                     ))}

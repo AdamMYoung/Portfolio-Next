@@ -14,7 +14,7 @@ export const BlogCard: FC<BlogCardProps> = ({ blog, color }) => {
 
     return (
         <Link href={`/blog/${slug}`}>
-            <section className="grid gap-4  snap-center cursor-pointer group w-full">
+            <section className="grid gap-4 snap-start cursor-pointer group w-full">
                 <div className="relative h-72">
                     <Image
                         layout="fill"
