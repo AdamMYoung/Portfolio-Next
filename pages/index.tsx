@@ -104,7 +104,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
     const repository = getContentRepository();
-    const blogPosts = await repository.getBlogs({ order: 'sys.createdAt' });
+    const blogPosts = await repository.getBlogs({ limit: 6, order: 'sys.createdAt' });
 
     return {
         props: {

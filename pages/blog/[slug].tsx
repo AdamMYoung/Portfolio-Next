@@ -42,7 +42,7 @@ const components: MDXComponents = {
 
         return (
             <div className="relative">
-                <Image layout="responsive" placeholder="blur" alt={props.alt} src={props.src} />
+                <Image layout="responsive" alt={props.alt} src={props.src} />
             </div>
         );
     },
