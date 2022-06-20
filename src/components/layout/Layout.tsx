@@ -14,7 +14,7 @@ export const Layout: FCC = ({ children }) => {
                     </div>
                 </div>
                 <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
-                    <div className="grid gap-2">
+                    <div className="grid gap-2 md:gap-4">
                         <div className="gap-1">
                             <p className="text-xl font-semibold">Contact</p>
                             <div className=" mt-2">
