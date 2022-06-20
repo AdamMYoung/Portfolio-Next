@@ -35,17 +35,6 @@ const components: MDXComponents = {
 
         return <pre className="no-prose bg-inherit rounded code-box" {...props} />;
     },
-    img: (props) => {
-        if (!props.src) {
-            return null;
-        }
-
-        return (
-            <div className="relative">
-                <Image layout="responsive" alt={props.alt} src={props.src} />
-            </div>
-        );
-    },
 };
 
 export const BlogPostPage: NextPage<{

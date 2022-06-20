@@ -6,7 +6,12 @@ import { DownIndicator } from '../src/components/common/down-indicator';
 import { FadeIn } from '../src/components/common/fade-in';
 import { FireText } from '../src/components/common/fire-text';
 import { Hero, HeroText, HeroTextBlock } from '../src/components/sections/hero';
-import { InfoBlock, InfoBlockDescription, InfoBlockTitle } from '../src/components/sections/info-block';
+import {
+    InfoBlock,
+    InfoBlockDescription,
+    InfoBlockLinkTitle,
+    InfoBlockTitle,
+} from '../src/components/sections/info-block';
 import { Layout } from '../src/components/layout';
 import { BlogPost, getContentRepository } from '../src/utils/content';
 import { BlogCard } from '../src/components/sections/blog-card';
@@ -77,7 +82,9 @@ const HomeBlog: FC<{ blogPosts: BlogPost[] }> = ({ blogPosts }) => {
     return (
         <FadeIn>
             <InfoBlock>
-                <InfoBlockTitle className="text-gradient-blue-purple pb-2">Blog</InfoBlockTitle>
+                <InfoBlockLinkTitle href="/blog" className="text-gradient-blue-purple pb-2">
+                    Blog
+                </InfoBlockLinkTitle>
                 <div className="snap-x flex md:snap-none overflow-hidden overflow-x-auto md:overflow-auto md:overflow-x-auto md:grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                     {blogPosts.map((b, i) => (
                         <div className="min-w-75vw md:min-w-0 md:w-auto" key={b.slug}>
@@ -104,7 +111,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
     const repository = getContentRepository();
-    const blogPosts = await repository.getBlogs({ limit: 6, order: 'sys.createdAt' });
+    const blogPosts = await repository.getBlogs({ limit: 6, order: '-sys.createdAt' });
 
     return {
         props: {
