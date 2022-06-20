@@ -17,6 +17,7 @@ import { dateToLongDate } from '../../src/utils/date';
 
 import { BlogCard } from '../../src/components/sections/blog-card';
 import { getHoverColorFromNumber } from '../../src/utils/color';
+import Image from 'next/image';
 
 hljsDefineGraphQL(hljs);
 hljs.configure({
@@ -33,6 +34,17 @@ const components: MDXComponents = {
         }, []);
 
         return <pre className="no-prose bg-inherit rounded code-box" {...props} />;
+    },
+    img: (props) => {
+        if (!props.src) {
+            return null;
+        }
+
+        return (
+            <div className="relative">
+                <Image layout="responsive" placeholder="blur" alt={props.alt} src={props.src} />
+            </div>
+        );
     },
 };
 
