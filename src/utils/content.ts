@@ -16,6 +16,8 @@ export type BlogPost = {
     topics: string[];
     summary: string;
     copy: string;
+    createdAt: string;
+    updatedAt: string;
 };
 
 export type Model = {};
@@ -62,6 +64,8 @@ class ContentfulRepository implements IContentRepository {
                 topics,
                 summary,
                 copy,
+                createdAt: i.sys.createdAt,
+                updatedAt: i.sys.updatedAt,
             };
         });
     }
@@ -82,6 +86,8 @@ class ContentfulRepository implements IContentRepository {
             topics,
             summary,
             copy,
+            createdAt: blogPost.items[0].sys.createdAt,
+            updatedAt: blogPost.items[0].sys.updatedAt,
         };
     }
     getModels(options?: QueryOptions): Promise<Model[]> {

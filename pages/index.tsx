@@ -78,9 +78,11 @@ const HomeBlog: FC<{ blogPosts: BlogPost[] }> = ({ blogPosts }) => {
         <FadeIn>
             <InfoBlock>
                 <InfoBlockTitle className="text-gradient-blue-purple pb-2">Blog</InfoBlockTitle>
-                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                <div className="snap-x flex md:snap-none overflow-hidden overflow-x-auto md:overflow-auto md:overflow-x-auto md:grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                     {blogPosts.map((b, i) => (
-                        <BlogCard key={b.slug} blog={b} color={getHoverColorFromNumber(i)} />
+                        <div className="min-w-half-screen md:min-w-0 md:w-auto" key={b.slug}>
+                            <BlogCard blog={b} color={getHoverColorFromNumber(i)} />
+                        </div>
                     ))}
                 </div>
             </InfoBlock>
@@ -102,7 +104,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
     const repository = getContentRepository();
-    const blogPosts = await repository.getBlogs({ limit: 3, order: 'sys.createdAt' });
+    const blogPosts = await repository.getBlogs({ order: 'sys.createdAt' });
 
     return {
         props: {

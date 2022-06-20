@@ -1,4 +1,8 @@
 export const getHoverColorFromNumber = (number: number) => {
+    if (number === 0) {
+        return 'group-hover:text-red-500';
+    }
+
     if (number % 3 === 0) {
         return 'group-hover:text-yellow-500';
     }

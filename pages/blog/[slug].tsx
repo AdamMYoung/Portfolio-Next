@@ -1,22 +1,77 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import React, { FC } from 'react';
+import React, { useEffect } from 'react';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import hljs from 'highlight.js/lib/common';
+import 'highlight.js/styles/github-dark.css';
+import hljsDefineGraphQL from 'highlightjs-graphql';
+
 import { Layout } from '../../src/components/layout';
 import { Hero, HeroText, HeroTextBlock } from '../../src/components/sections/hero';
+import { InfoBlock, InfoBlockTitle } from '../../src/components/sections/info-block';
 import { BlogPost, getContentRepository } from '../../src/utils/content';
+import { dateToLongDate } from '../../src/utils/date';
+import Link from 'next/link';
+import { BlogCard } from '../../src/components/sections/blog-card';
+import { getHoverColorFromNumber } from '../../src/utils/color';
 
-export const BlogPostPage: NextPage<{ blogPost: BlogPost }> = ({ blogPost }) => {
-    const { title, summary } = blogPost;
+hljsDefineGraphQL(hljs);
+hljs.configure({
+    ignoreUnescapedHTML: true,
+});
+
+const components = {
+    pre: (props: unknown) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useEffect(() => {
+            hljs.initHighlighting();
+        }, []);
+
+        return <pre className="no-prose bg-inherit rounded code-box" {...props} />;
+    },
+};
+
+export const BlogPostPage: NextPage<{
+    blogPost: BlogPost;
+    additionalBlogPosts: BlogPost[];
+    markdown: MDXRemoteSerializeResult<Record<string, unknown>>;
+}> = ({ blogPost, markdown, additionalBlogPosts }) => {
+    const { title, summary, updatedAt, createdAt } = blogPost;
+
+    const createdAtText = dateToLongDate(createdAt);
+    const updatedAtText = dateToLongDate(updatedAt);
 
     return (
         <Layout>
             <Hero>
                 <HeroTextBlock>
+                    <Link href="/" passHref>
+                        <a className="hover:underline">{'< Home'}</a>
+                    </Link>
                     <HeroText>
                         <span className="text-gradient-blue-purple">{title}</span>
                     </HeroText>
                     <p className="leading-12 text-2xl">{summary}</p>
+                    <p className="leading-12 text-gray-400 text-md">
+                        {' '}
+                        {createdAtText} {createdAtText !== updatedAtText && `(Updated on ` + updatedAtText + ')'}
+                    </p>
                 </HeroTextBlock>
             </Hero>
+            <InfoBlock>
+                <div className="max-w-3xl prose prose-zinc text-white prose-headings:text-gradient-yellow-green prose-code:text-red-500 prose-a:text-white prose-strong:text-white">
+                    <MDXRemote {...markdown} components={components} />
+                </div>
+            </InfoBlock>
+
+            <InfoBlock>
+                <InfoBlockTitle className="text-gradient-blue-purple pb-2">Related Posts</InfoBlockTitle>
+                <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                    {additionalBlogPosts.map((b, i) => (
+                        <BlogCard key={b.slug} blog={b} color={getHoverColorFromNumber(i)} />
+                    ))}
+                </div>
+            </InfoBlock>
         </Layout>
     );
 };
@@ -42,8 +97,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
 
     const blogPost = await content.getBlog(params.slug);
+    const recentBlogPosts = await content.getBlogs({ limit: 4, order: 'sys.createdAt' });
+    const markdown = await serialize(blogPost.copy);
 
-    return { props: { blogPost } };
+    return {
+        props: { blogPost, markdown, additionalBlogPosts: recentBlogPosts.filter((i) => i.slug !== blogPost.slug) },
+    };
 };
 
 export default BlogPostPage;

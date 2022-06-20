@@ -23,9 +23,11 @@ export const FadeIn: FCCTag<'div'> = ({ children, className, ...rest }) => {
     }, [fadeElementRef]);
 
     return (
-        <div className={`${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+        <div
+            ref={(ref) => setFadeElementRef(ref)}
+            className={`${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
+        >
             {children}
-            <div ref={(ref) => setFadeElementRef(ref)} />
         </div>
     );
 };
