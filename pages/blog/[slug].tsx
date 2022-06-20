@@ -2,6 +2,9 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import React, { useEffect } from 'react';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import * as mdx from '@mdx-js/react';
+import Link from 'next/link';
+
 import hljs from 'highlight.js/lib/common';
 import 'highlight.js/styles/github-dark.css';
 import hljsDefineGraphQL from 'highlightjs-graphql';
@@ -11,7 +14,7 @@ import { Hero, HeroText, HeroTextBlock } from '../../src/components/sections/her
 import { InfoBlock, InfoBlockTitle } from '../../src/components/sections/info-block';
 import { BlogPost, getContentRepository } from '../../src/utils/content';
 import { dateToLongDate } from '../../src/utils/date';
-import Link from 'next/link';
+
 import { BlogCard } from '../../src/components/sections/blog-card';
 import { getHoverColorFromNumber } from '../../src/utils/color';
 
@@ -20,8 +23,10 @@ hljs.configure({
     ignoreUnescapedHTML: true,
 });
 
-const components = {
-    pre: (props: unknown) => {
+type MDXComponents = React.ComponentProps<typeof mdx.MDXProvider>['components'];
+
+const components: MDXComponents = {
+    pre: (props) => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         useEffect(() => {
             hljs.initHighlighting();
