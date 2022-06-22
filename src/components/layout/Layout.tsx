@@ -50,7 +50,6 @@ export const Layout: FCC = ({ children }) => {
                                 <Link passHref href="/projects">
                                     <a className="block">Projects</a>
                                 </Link>
-                                <a className="block">Stats</a>
                             </div>
                         </div>
                     </div>
