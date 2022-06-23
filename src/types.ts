@@ -5,7 +5,7 @@ import React, { ComponentPropsWithoutRef, ElementType, FC } from 'react';
  */
 export type FCC<T = {}> = FC<
     {
-        children: React.ReactNode;
+        children?: React.ReactNode;
     } & T
 >;
 

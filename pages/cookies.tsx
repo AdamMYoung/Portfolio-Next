@@ -2,14 +2,22 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Layout } from '../src/components/layout';
+import { SEO } from '../src/components/meta/SEO';
 import { Hero, HeroTextBlock } from '../src/components/sections/hero';
 
 const Cookies = () => {
     return (
         <Layout>
+            <SEO
+                title="Cookies"
+                description="Cookie information, detailing how and why they're used."
+                canonical="/cookies/"
+            />
             <Hero>
                 <HeroTextBlock>
-                    <Link href="/">{'< Back'}</Link>
+                    <Link href="/" passHref>
+                        <a className="hover:underline">{'< Home'}</a>
+                    </Link>
                     <div className="grid gap-4 ">
                         <h1 className="text-3xl">Disabling Cookies</h1>
                         <p>

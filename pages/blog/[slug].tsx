@@ -18,6 +18,7 @@ import { dateToLongDate } from '../../src/utils/date';
 import { BlogCard } from '../../src/components/sections/blog-card';
 import { getHoverColorFromNumber } from '../../src/utils/color';
 import Image from 'next/image';
+import { SEO } from '../../src/components/meta/SEO';
 
 hljsDefineGraphQL(hljs);
 hljs.configure({
@@ -42,21 +43,48 @@ export const BlogPostPage: NextPage<{
     additionalBlogPosts: BlogPost[];
     markdown: MDXRemoteSerializeResult<Record<string, unknown>>;
 }> = ({ blogPost, markdown, additionalBlogPosts }) => {
-    const { title, summary, updatedAt, createdAt } = blogPost;
+    const { title, summary, updatedAt, slug, createdAt, heroImageUrl } = blogPost;
 
     const createdAtText = dateToLongDate(createdAt);
     const updatedAtText = dateToLongDate(updatedAt);
 
     return (
         <Layout>
+            <SEO
+                title={title}
+                description={summary}
+                canonical={`/blog/${slug}/`}
+                imageUrl={heroImageUrl}
+                imageAlt={title}
+            >
+                <meta property="og:type" content="article" />
+                <meta property="og:article:published_time" content={createdAt} />
+                <meta property="og:article:modified_time" content={updatedAt} />
+                <meta property="og:article:section" content="Software Development" />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'NewsArticle',
+                        headline: title,
+                        image: [heroImageUrl],
+                        datePublished: createdAt,
+                        dateModified: updatedAt,
+                        author: [
+                            {
+                                '@type': 'Person',
+                                name: 'Adam Young',
+                                url: 'http://aydev.uk',
+                            },
+                        ],
+                    })}
+                </script>
+            </SEO>
             <Hero>
                 <HeroTextBlock>
                     <Link href="/" passHref>
                         <a className="hover:underline">{'< Home'}</a>
                     </Link>
-                    <HeroText>
-                        <span className="text-gradient-blue-purple">{title}</span>
-                    </HeroText>
+                    <HeroText className="text-gradient-blue-purple">{title}</HeroText>
                     <p className="leading-12 text-2xl">{summary}</p>
                     <p className="leading-12 text-gray-400 text-md">
                         {' '}

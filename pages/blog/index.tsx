@@ -1,7 +1,9 @@
 import { GetStaticProps, NextPage } from 'next';
+import Link from 'next/link';
 import React from 'react';
 import { DownIndicator } from '../../src/components/common/down-indicator';
 import { Layout } from '../../src/components/layout';
+import { SEO } from '../../src/components/meta/SEO';
 import { BlogCard } from '../../src/components/sections/blog-card';
 import { Hero, HeroText, HeroTextBlock } from '../../src/components/sections/hero';
 import { InfoBlock } from '../../src/components/sections/info-block';
@@ -15,9 +17,17 @@ type BlogProps = {
 export const Blog: NextPage<BlogProps> = ({ blogPosts }) => {
     return (
         <Layout>
+            <SEO
+                title="Blog"
+                description="The AYDev Blog. Find tips and guides across web development right here."
+                canonical="/blog/"
+            />
             <Hero>
-                <HeroTextBlock className="text-gradient-blue-purple">
-                    <HeroText>Blog</HeroText>
+                <HeroTextBlock>
+                    <Link href="/" passHref>
+                        <a className="hover:underline">{'< Home'}</a>
+                    </Link>
+                    <HeroText className="text-gradient-blue-purple">Blog</HeroText>
                     <DownIndicator />
                 </HeroTextBlock>
             </Hero>

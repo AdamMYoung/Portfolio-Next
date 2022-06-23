@@ -1,0 +1,34 @@
+import { Se } from 'next';
+import Head from 'next/head';
+import { FCC } from '../../types';
+
+type SEOProps = {
+    title: string;
+    description: string;
+    canonical: string;
+    imageUrl?: string;
+    imageAlt?: string;
+};
+
+export const SEO: FCC<SEOProps> = ({ children, title, description, canonical, imageUrl, imageAlt }) => {
+    return (
+        <Head>
+            <html lang="en" />
+            <title>{`AYDev | ${title}`}</title>
+            <meta name="description" content={description} />
+            <link rel="canonical" href={`https://aydev.uk${canonical}`} />
+
+            <meta property="og:title" content={title} />
+            <meta property="og:site_name" content="AYDev" />
+            <meta property="og:locale" content="en_GB" />
+            <meta property="og:description" content={description} />
+
+            {imageUrl && <meta property="og:image" content={imageUrl} />}
+            {imageAlt && <meta property="og:image:alt" content={title} />}
+
+            <meta name="theme-color" content="#000" />
+
+            {children}
+        </Head>
+    );
+};

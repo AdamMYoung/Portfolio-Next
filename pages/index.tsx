@@ -16,6 +16,7 @@ import { Layout } from '../src/components/layout';
 import { BlogPost, getContentRepository } from '../src/utils/content';
 import { BlogCard } from '../src/components/sections/blog-card';
 import { getHoverColorFromNumber } from '../src/utils/color';
+import { SEO } from '../src/components/meta/SEO';
 
 type HomeProps = {
     blogPosts: BlogPost[];
@@ -100,6 +101,11 @@ const HomeBlog: FC<{ blogPosts: BlogPost[] }> = ({ blogPosts }) => {
 const Home: NextPage<HomeProps> = ({ blogPosts }) => {
     return (
         <Layout>
+            <SEO
+                title="Home"
+                description="Hi, I'm Adam Young, a Software Engineer based in County Durham, currently working at Checkout.com. Here, you'll find articles about software development, my interests, and the projects I've currently got on the go."
+                canonical="/"
+            />
             <HomeHero />
             <HomeAboutMe />
             <HomeBlog blogPosts={blogPosts} />

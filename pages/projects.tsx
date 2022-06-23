@@ -7,6 +7,8 @@ import { GetStaticProps, NextPage } from 'next';
 import { getGithubRepository, Repository } from '../src/utils/github';
 import { Layout } from '../src/components/layout';
 import { InfoBlock } from '../src/components/sections/info-block';
+import Link from 'next/link';
+import { SEO } from '../src/components/meta/SEO';
 
 type ProjectsProps = {
     projects: Repository[];
@@ -50,8 +52,16 @@ const ProjectTable: FC<{ projects: Repository[] }> = ({ projects }) => {
 const Projects: NextPage<ProjectsProps> = ({ projects }) => {
     return (
         <Layout>
+            <SEO
+                title="Projects"
+                description="All websites, libraries and other bits of code I've developed."
+                canonical="/projects/"
+            />
             <Hero>
                 <HeroTextBlock>
+                    <Link href="/" passHref>
+                        <a className="hover:underline">{'< Home'}</a>
+                    </Link>
                     <HeroText className="text-gradient-blue-purple pb-2">Projects</HeroText>
                     <DownIndicator />
                 </HeroTextBlock>
