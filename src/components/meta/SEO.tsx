@@ -1,4 +1,3 @@
-import { Se } from 'next';
 import Head from 'next/head';
 import { FCC } from '../../types';
 
