@@ -12,7 +12,6 @@ type SEOProps = {
 export const SEO: FCC<SEOProps> = ({ children, title, description, canonical, imageUrl, imageAlt }) => {
     return (
         <Head>
-            <html lang="en" />
             <title>{`AYDev | ${title}`}</title>
             <meta name="description" content={description} />
             <link rel="canonical" href={`https://aydev.uk${canonical}`} />
