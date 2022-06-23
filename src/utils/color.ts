@@ -17,3 +17,27 @@ export const getHoverColorFromNumber = (number: number) => {
 
     return 'group-hover:text-red-500';
 };
+
+let colorIndex = 0;
+const baseColors = ['red', 'blue', 'green', 'yellow', 'orange', 'cyan', 'indigo', 'purple'];
+const colorSelection = baseColors.map((c) => `text-${c}-500`);
+
+const repeatableColors: Record<string, string> = {};
+
+export const getRepeatableColor = (key: string) => {
+    const color = repeatableColors[key];
+
+    if (color) {
+        return color;
+    }
+
+    if (colorIndex + 1 > colorSelection.length - 1) {
+        colorIndex = 0;
+    } else {
+        colorIndex++;
+    }
+
+    repeatableColors[key] = colorSelection[colorIndex];
+
+    return repeatableColors[key];
+};

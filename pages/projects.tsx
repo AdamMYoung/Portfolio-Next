@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { DownIndicator } from '../src/components/common/down-indicator';
 
-import { BlogCard } from '../src/components/sections/blog-card';
 import { Hero, HeroText, HeroTextBlock } from '../src/components/sections/hero';
 import { GetStaticProps, NextPage } from 'next';
 import { getGithubRepository, Repository } from '../src/utils/github';
@@ -9,6 +8,9 @@ import { Layout } from '../src/components/layout';
 import { InfoBlock } from '../src/components/sections/info-block';
 import Link from 'next/link';
 import { SEO } from '../src/components/meta/SEO';
+import { getRepeatableColor } from '../src/utils/color';
+
+const collator = new Intl.Collator('en-GB');
 
 type ProjectsProps = {
     projects: Repository[];
@@ -16,7 +18,7 @@ type ProjectsProps = {
 
 const ProjectTable: FC<{ projects: Repository[] }> = ({ projects }) => {
     return (
-        <InfoBlock>
+        <InfoBlock className="overflow-hidden overflow-x-auto">
             <table className="table-auto">
                 <thead className="border-b text-2xl">
                     <tr>
@@ -36,8 +38,10 @@ const ProjectTable: FC<{ projects: Repository[] }> = ({ projects }) => {
                             <td className="py-2">{repo.description}</td>
                             <td className="py-2">
                                 <div className="flex flex-wrap gap-2">
-                                    {repo.languages.map((l) => (
-                                        <p key={l}>{l}</p>
+                                    {repo.languages.sort(collator.compare).map((l) => (
+                                        <p className={getRepeatableColor(l)} key={l}>
+                                            {l}
+                                        </p>
                                     ))}
                                 </div>
                             </td>
