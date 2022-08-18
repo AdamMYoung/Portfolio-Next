@@ -7,13 +7,13 @@ const Document: NextPage = () => {
         <Html>
             <Head />
             <body>
-                <Script src="https://www.googletagmanager.com/gtag/js?id=G-WGNHV27GTK" strategy="afterInteractive" />
+                <Script src="https://www.googletagmanager.com/gtag/js?id=G-WGNHV27GTK" strategy="beforeInteractive" />
                 <Script
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9732665435466396"
-                    strategy="afterInteractive"
+                    strategy="beforeInteractive"
                     crossOrigin="anonymous"
                 />
-                <Script id="google-analytics" strategy="afterInteractive">
+                <Script id="google-analytics" strategy="beforeInteractive">
                     {`
                       window.dataLayer = window.dataLayer || [];
                       function gtag(){window.dataLayer.push(arguments);}
