@@ -5,14 +5,16 @@ import Script from 'next/script';
 const Document: NextPage = () => {
     return (
         <Html>
-            <Head />
+            <Head>
+                <script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9732665435466396"
+                    crossOrigin="anonymous"
+                ></script>
+            </Head>
             <body>
                 <Script src="https://www.googletagmanager.com/gtag/js?id=G-WGNHV27GTK" strategy="beforeInteractive" />
-                <Script
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9732665435466396"
-                    strategy="beforeInteractive"
-                    crossOrigin="anonymous"
-                />
+
                 <Script id="google-analytics" strategy="beforeInteractive">
                     {`
                       window.dataLayer = window.dataLayer || [];
