@@ -84,7 +84,7 @@ const HomeBlog: FC<{ blogPosts: BlogPost[] }> = ({ blogPosts }) => {
         <FadeIn>
             <InfoBlock>
                 <InfoBlockLinkTitle href="/blog" className="text-gradient-blue-purple pb-2">
-                    Blog
+                    Tech Blog
                 </InfoBlockLinkTitle>
                 <div className="snap-x flex md:snap-none overflow-hidden overflow-x-auto md:overflow-auto md:overflow-x-auto md:grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                     {blogPosts.map((b, i) => (

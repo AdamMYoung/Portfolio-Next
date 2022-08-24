@@ -1,13 +1,17 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import * as mdx from '@mdx-js/react';
 import Link from 'next/link';
+import { BiCopyAlt } from 'react-icons/bi';
 
 import hljs from 'highlight.js/lib/common';
 import 'highlight.js/styles/github-dark.css';
 import hljsDefineGraphQL from 'highlightjs-graphql';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Layout } from '../../src/components/layout';
 import { Hero, HeroText, HeroTextBlock } from '../../src/components/sections/hero';
@@ -17,7 +21,7 @@ import { dateToLongDate } from '../../src/utils/date';
 
 import { BlogCard } from '../../src/components/sections/blog-card';
 import { getHoverColorFromNumber } from '../../src/utils/color';
-import Image from 'next/image';
+
 import { SEO } from '../../src/components/meta/SEO';
 
 hljsDefineGraphQL(hljs);
@@ -34,7 +38,36 @@ const components: MDXComponents = {
             hljs.initHighlighting();
         }, []);
 
-        return <pre className="no-prose bg-inherit rounded code-box" {...props} />;
+        const codeElement = props?.children as ReactElement;
+        const codeContent = codeElement.props?.children as string;
+
+        const handleCopyClick = async () => {
+            try {
+                await navigator.clipboard.writeText(codeContent);
+                toast('Code copied to clipboard!', {
+                    position: 'bottom-center',
+                    autoClose: 2000,
+                    theme: 'dark',
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                });
+            } catch {}
+        };
+
+        return (
+            <pre className="relative no-prose bg-inherit rounded code-box" {...props}>
+                {codeElement}
+                <button
+                    className="absolute bottom-12 md:bottom-8 right-8 bg-white rounded p-1"
+                    onClick={handleCopyClick}
+                >
+                    <BiCopyAlt color="black" className="h-6 w-6" />
+                </button>
+            </pre>
+        );
     },
 };
 
@@ -50,6 +83,7 @@ export const BlogPostPage: NextPage<{
 
     return (
         <Layout>
+            <ToastContainer />
             <SEO
                 title={title}
                 description={summary}
@@ -87,7 +121,6 @@ export const BlogPostPage: NextPage<{
                     <HeroText className="text-gradient-blue-purple">{title}</HeroText>
                     <p className="leading-12 text-2xl">{summary}</p>
                     <p className="leading-12 text-gray-400 text-md">
-                        {' '}
                         {createdAtText} {createdAtText !== updatedAtText && `(Updated on ` + updatedAtText + ')'}
                     </p>
                 </HeroTextBlock>
