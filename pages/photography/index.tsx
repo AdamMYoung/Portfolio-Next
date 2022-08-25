@@ -22,28 +22,30 @@ type PhotographyProps = {
 
 const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
   return (
-    <InfoBlock className="grid gap-1 max-w-3xl">
-      {albums.map((a) => (
-        <article key={a.slug} className="relative w-full">
-          <Image
-            src={a.coverUrl}
-            alt={a.title}
-            objectFit="cover"
-            height={600}
-            width={800}
-          />
-          <a
-            href={`/photography/${a.slug}`}
-            className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-40 hover:opacity-50 z-10"
-          />
-          <div className="absolute p-8 grid gap-2 text-white bottom-0 z-20 pointer-events-none">
-            <h2 className="text-2xl md:text-4xl">{a.title}</h2>
-            <p className="md:text-lg">
-              {a.count} image{a.count > 1 && "s"}
-            </p>
-          </div>
-        </article>
-      ))}
+    <InfoBlock className="grid gap-1 ">
+      <div className="max-w-3xl">
+        {albums.map((a) => (
+          <article key={a.slug} className="relative w-full">
+            <Image
+              src={a.coverUrl}
+              alt={a.title}
+              objectFit="cover"
+              height={600}
+              width={800}
+            />
+            <a
+              href={`/photography/${a.slug}`}
+              className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10"
+            />
+            <div className="absolute p-8 grid gap-2 text-white bottom-0 z-20 pointer-events-none">
+              <h2 className="text-2xl md:text-4xl">{a.title}</h2>
+              <p className="md:text-lg">
+                {a.count} image{a.count > 1 && "s"}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
     </InfoBlock>
   );
 };

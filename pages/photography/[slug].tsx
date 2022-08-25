@@ -22,22 +22,31 @@ type PhotographyProps = {
 };
 
 const ImageList: FC<{ album: AlbumDetail }> = ({ album }) => {
+  const handleDownloadClick = async (url: string) => {
+    const data = await fetch(url);
+    const dataBlob = await data.blob();
+    const dataUrl = URL.createObjectURL(dataBlob);
+
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = "download.png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   return (
     <InfoBlock className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
       {album.imageUrls.map((a) => (
-        <div key={a} className="relative w-full">
+        <div key={a} className="relative h-full w-full">
           <Image src={a} alt="" objectFit="cover" height={600} width={800} />
-          <div className="absolute bottom-0 right-0">
-            <a
-              href={a}
-              target="_blank"
-              rel="noreferrer"
-              download
+          <div className="absolute bottom-12 md:bottom-0 right-0">
+            <button
               className="absolute md:bottom-4 right-4 translate-all hover:shadow-md bg-white rounded p-1"
-              aria-label="Download"
+              onClick={() => handleDownloadClick(a)}
             >
               <BiDownload color="black" className="h-6 w-6" />
-            </a>
+            </button>
           </div>
         </div>
       ))}
@@ -59,7 +68,7 @@ const AlbumContent: NextPage<PhotographyProps> = ({ album }) => {
             <a className="hover:underline">{"< Back"}</a>
           </Link>
           <HeroText className="text-gradient-blue-purple pb-2">
-            {album.title}
+            Album - {album.title}
           </HeroText>
           <DownIndicator />
         </HeroTextBlock>
