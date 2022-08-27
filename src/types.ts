@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementType, FC } from 'react';
+import React, { ComponentPropsWithoutRef, ElementType, FC } from "react";
 
 /**
  * (F)unctional (C)omponent with (C)hildren.

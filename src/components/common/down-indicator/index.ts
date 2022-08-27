@@ -1,1 +1,1 @@
-export * from './DownIndicator';
+export * from "./DownIndicator";

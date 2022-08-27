@@ -1,1 +1,1 @@
-declare module 'highlightjs-graphql';
+declare module "highlightjs-graphql";

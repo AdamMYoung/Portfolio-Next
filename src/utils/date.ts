@@ -1,11 +1,11 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 /**
  * Parses a date into a date formatted as "MMMM DD, YYYY" e.g. "September 14, 2021"
  * @param date Date to parse.
  */
 export const dateToLongDate = (date: string | Date) => {
-    return dayjs(date).format('MMMM DD, YYYY');
+    return dayjs(date).format("MMMM DD, YYYY");
 };
 
 /**
@@ -13,10 +13,10 @@ export const dateToLongDate = (date: string | Date) => {
  * @param date Date to parse.
  */
 export const dateToMonthYear = (date: string | Date) => {
-    return dayjs(date).format('MMMM YYYY');
+    return dayjs(date).format("MMMM YYYY");
 };
 
-export const isDateWithinRange = (date: string | Date, rangeNumber: number, rangeType: 'day' | 'month' | 'year') => {
+export const isDateWithinRange = (date: string | Date, rangeNumber: number, rangeType: "day" | "month" | "year") => {
     const dateToCompare = dayjs(date);
     const today = dayjs();
     const range = dayjs().subtract(rangeNumber, rangeType);

@@ -1,6 +1,6 @@
-import '../styles/globals.css';
-import '@fontsource/source-code-pro';
-import type { AppProps } from 'next/app';
+import "../styles/globals.css";
+import "@fontsource/source-code-pro";
+import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (

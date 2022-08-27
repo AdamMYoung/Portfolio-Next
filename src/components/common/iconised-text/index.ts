@@ -1,1 +1,1 @@
-export * from './IconisedText';
+export * from "./IconisedText";

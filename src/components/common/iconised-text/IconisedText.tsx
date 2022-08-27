@@ -1,9 +1,9 @@
-import classNames from 'classnames';
-import Image, { StaticImageData } from 'next/image';
-import { ComponentPropsWithoutRef, FC } from 'react';
-import { FCCTag } from '../../../types';
+import classNames from "classnames";
+import Image, { StaticImageData } from "next/image";
+import { ComponentPropsWithoutRef, FC } from "react";
+import { FCCTag } from "../../../types";
 
-type IconisedTextProps = ComponentPropsWithoutRef<'span'> & {
+type IconisedTextProps = ComponentPropsWithoutRef<"span"> & {
     src: StaticImageData;
     children: React.ReactNode;
 };
@@ -11,7 +11,7 @@ type IconisedTextProps = ComponentPropsWithoutRef<'span'> & {
 export const IconisedText: FC<IconisedTextProps> = ({ children, src, className, ...rest }) => {
     return (
         <div className="inline-block relative" {...rest}>
-            <div className={classNames('absolute top-0 scale-150', className)}>
+            <div className={classNames("absolute top-0 scale-150", className)}>
                 <Image src={src} alt="" />
             </div>
             <span className="z-10">{children}</span>

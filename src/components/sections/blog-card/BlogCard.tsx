@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { FC } from 'react';
-import { BlogPost } from '../../../utils/content';
+import Image from "next/image";
+import Link from "next/link";
+import React, { FC } from "react";
+import { BlogPost } from "../../../utils/content";
 
 type BlogCardProps = {
     blog: BlogPost;

@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import { FCC } from '../../types';
+import Head from "next/head";
+import { FCC } from "../../types";
 
 type SEOProps = {
     title: string;

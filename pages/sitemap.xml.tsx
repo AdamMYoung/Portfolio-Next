@@ -1,5 +1,5 @@
-import { GetServerSideProps } from 'next';
-import { getContentRepository } from '../src/utils/content';
+import { GetServerSideProps } from "next";
+import { getContentRepository } from "../src/utils/content";
 
 const Sitemap = () => {};
 
@@ -10,17 +10,17 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     const blogPosts = await contentRepository.getBlogs();
 
     const baseUrl = {
-        development: 'http://localhost:3000',
-        production: 'https://aydev.uk',
+        development: "http://localhost:3000",
+        production: "https://aydev.uk",
     }[process.env.NODE_ENV as string];
 
     const currentDate = new Date().toISOString();
 
     const staticLinks = [
-        { link: '/', date: currentDate },
-        { link: '/cookies', date: currentDate },
-        { link: '/projects', date: currentDate },
-        { link: '/blog', date: currentDate },
+        { link: "/", date: currentDate },
+        { link: "/cookies", date: currentDate },
+        { link: "/projects", date: currentDate },
+        { link: "/blog", date: currentDate },
     ];
     const blogLinks = blogPosts.map((b) => ({ link: `/blog/${b.slug}`, date: b.updatedAt }));
 
@@ -39,11 +39,11 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
        </url>
      `
            )
-           .join('')}
+           .join("")}
       </urlset>
     `;
 
-    res.setHeader('Content-Type', 'text/xml');
+    res.setHeader("Content-Type", "text/xml");
     res.write(sitemap);
     res.end();
 

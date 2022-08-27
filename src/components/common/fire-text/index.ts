@@ -1,1 +1,1 @@
-export * from './FireText';
+export * from "./FireText";

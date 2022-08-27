@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
-import { Layout } from '../src/components/layout';
-import { SEO } from '../src/components/meta/SEO';
-import { Hero, HeroTextBlock } from '../src/components/sections/hero';
+import { Layout } from "../src/components/layout";
+import { SEO } from "../src/components/meta/SEO";
+import { Hero, HeroTextBlock } from "../src/components/sections/hero";
 
 const Cookies = () => {
     return (
@@ -16,7 +16,7 @@ const Cookies = () => {
             <Hero>
                 <HeroTextBlock>
                     <Link href="/" passHref>
-                        <a className="hover:underline">{'< Home'}</a>
+                        <a className="hover:underline">{"< Home"}</a>
                     </Link>
                     <div className="grid gap-4 ">
                         <h1 className="text-3xl">Disabling Cookies</h1>

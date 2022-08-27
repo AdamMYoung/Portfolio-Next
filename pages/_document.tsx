@@ -1,6 +1,6 @@
-import { NextPage } from 'next';
-import { Html, Head, Main, NextScript } from 'next/document';
-import Script from 'next/script';
+import { NextPage } from "next";
+import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 const Document: NextPage = () => {
     return (
