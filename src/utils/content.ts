@@ -36,12 +36,18 @@ export type ContentfulAlbum = {
 export type Album = {
     title: string;
     slug: string;
-    coverUrl: string;
+    cover: Image;
     count: number;
 };
 
 export type AlbumDetail = Album & {
-    imageUrls: string[];
+    imageUrls: Image[];
+};
+
+export type Image = {
+    url: string;
+    height: number;
+    width: number;
 };
 
 export type QueryOptions = {
@@ -61,6 +67,17 @@ interface IContentRepository {
     getAlbum(slug: string, options?: QueryOptions): Promise<AlbumDetail>;
 }
 
+const albumSizeSort = (a: contentful.Entry<ContentfulAlbum>, b: contentful.Entry<ContentfulAlbum>) => {
+    return b.fields.images.length - a.fields.images.length;
+};
+
+const imageAspectRatioSort = (a: contentful.Asset, b: contentful.Asset) => {
+    const aDims = a.fields.file.details.image;
+    const bDims = b.fields.file.details.image;
+
+    return bDims!.height / bDims!.width - aDims!.height / aDims!.width;
+};
+
 class ContentfulRepository implements IContentRepository {
     private _client: contentful.ContentfulClientApi;
 
@@ -77,13 +94,18 @@ class ContentfulRepository implements IContentRepository {
             ...options,
         });
 
-        return albums.items.map((i) => {
+        return albums.items.sort(albumSizeSort).map((i) => {
             const { name, slug, cover, images } = i.fields;
+            const { url, details } = cover.fields.file;
 
             return {
                 title: name,
                 slug,
-                coverUrl: `https:${cover.fields.file.url}`,
+                cover: {
+                    url: `https:${url}`,
+                    height: details.image!.height,
+                    width: details.image!.width,
+                },
                 count: images.length,
             };
         });
@@ -97,13 +119,25 @@ class ContentfulRepository implements IContentRepository {
         });
 
         const { name, cover, images } = albums.items[0].fields;
+        const { url, details } = cover.fields.file;
 
         return {
             title: name,
             slug,
-            coverUrl: `https:${cover.fields.file.url}`,
+            cover: {
+                url: `https:${url}`,
+                height: details.image!.height,
+                width: details.image!.width,
+            },
             count: images.length,
-            imageUrls: images.map((i) => `https:${i.fields.file.url}`),
+            imageUrls: images.sort(imageAspectRatioSort).map((i) => {
+                const { url, details } = i.fields.file;
+                return {
+                    url: `https:${url}`,
+                    height: details.image!.height,
+                    width: details.image!.width,
+                };
+            }),
         };
     }
     async getBlogs(options?: QueryOptions): Promise<BlogPost[]> {

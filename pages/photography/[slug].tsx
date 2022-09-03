@@ -25,24 +25,33 @@ const ImageList: FC<{ album: AlbumDetail }> = ({ album }) => {
 
         const a = document.createElement("a");
         a.href = dataUrl;
-        a.download = "download.png";
+        a.download = "image.png";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
     };
 
     return (
-        <InfoBlock className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-            {album.imageUrls.map((a) => (
-                <div key={a} className="relative h-full w-full">
-                    <Image src={a} alt="" objectFit="cover" height={600} width={800} />
-                    <div className="absolute bottom-12 md:bottom-0 right-0">
-                        <button
-                            className="absolute md:bottom-4 right-4 translate-all hover:shadow-md bg-white rounded p-1"
-                            onClick={() => handleDownloadClick(a)}
-                        >
-                            <BiDownload color="black" className="h-6 w-6" />
-                        </button>
+        <InfoBlock className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-2">
+            {album.imageUrls.map((image) => (
+                <div key={image.url}>
+                    <div className="relative w-full">
+                        <Image
+                            src={image.url}
+                            alt=""
+                            className="rounded"
+                            layout="responsive"
+                            width={image.width}
+                            height={image.height}
+                        />
+                        <div className="absolute bottom-12 md:bottom-0 right-0">
+                            <button
+                                className="absolute md:bottom-4 right-4 translate-all hover:shadow-md hover:bg-slate-200 bg-white rounded p-1"
+                                onClick={() => handleDownloadClick(image.url)}
+                            >
+                                <BiDownload color="black" className="h-6 w-6" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             ))}

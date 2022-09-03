@@ -17,6 +17,7 @@ import { BlogPost, getContentRepository } from "../src/utils/content";
 import { BlogCard } from "../src/components/sections/blog-card";
 import { getHoverColorFromNumber } from "../src/utils/color";
 import { SEO } from "../src/components/meta/SEO";
+import Link from "next/link";
 
 type HomeProps = {
     blogPosts: BlogPost[];
@@ -76,9 +77,9 @@ const HomeAboutMe = () => {
                 </InfoBlockDescription>
                 <InfoBlockDescription>
                     I also do photography in my spare time; a collection of my work can be found{" "}
-                    <a className="underline" href="/photography">
+                    <Link className="underline" href="/photography">
                         here
-                    </a>
+                    </Link>
                     .
                 </InfoBlockDescription>
             </InfoBlock>

@@ -18,11 +18,19 @@ type PhotographyProps = {
 
 const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
     return (
-        <InfoBlock className="grid gap-1 ">
-            <div className="max-w-3xl">
+        <InfoBlock>
+            <div className="max-w-3xl grid gap-2">
                 {albums.map((a) => (
                     <article key={a.slug} className="relative w-full">
-                        <Image src={a.coverUrl} alt={a.title} objectFit="cover" height={600} width={800} />
+                        <Image
+                            src={a.cover.url}
+                            alt={a.title}
+                            className="rounded"
+                            objectFit="cover"
+                            layout="responsive"
+                            height={a.cover.height}
+                            width={a.cover.width}
+                        />
                         <a
                             href={`/photography/${a.slug}`}
                             className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10"
