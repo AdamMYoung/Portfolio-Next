@@ -34,7 +34,7 @@ const ImageList: FC<{ album: AlbumDetail }> = ({ album }) => {
     return (
         <InfoBlock className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-2">
             {album.imageUrls.map((image) => (
-                <div key={image.url}>
+                <div key={image.url} className="my-auto">
                     <div className="relative w-full">
                         <Image
                             src={image.url}

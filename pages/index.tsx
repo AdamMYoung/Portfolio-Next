@@ -52,7 +52,7 @@ const HomeAboutMe = () => {
 
     return (
         <FadeIn>
-            <InfoBlock>
+            <InfoBlock className="gap-6">
                 <InfoBlockTitle className="text-gradient-orange-blue">About Me</InfoBlockTitle>
                 <InfoBlockDescription>
                     I have {yearsExperience} years experience in{" "}
@@ -76,9 +76,9 @@ const HomeAboutMe = () => {
                     .
                 </InfoBlockDescription>
                 <InfoBlockDescription>
-                    I also do photography in my spare time; a collection of my work can be found{" "}
-                    <Link className="underline" href="/photography">
-                        here
+                    I also do photography in my spare time;{" "}
+                    <Link passHref href="/photography">
+                        <a className="underline">a collection of my work can be found here</a>
                     </Link>
                     .
                 </InfoBlockDescription>

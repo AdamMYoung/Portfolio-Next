@@ -31,10 +31,9 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
                             height={a.cover.height}
                             width={a.cover.width}
                         />
-                        <a
-                            href={`/photography/${a.slug}`}
-                            className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10"
-                        />
+                        <Link passHref href={`/photography/${a.slug}`}>
+                            <a className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10" />
+                        </Link>
                         <div className="absolute p-8 grid gap-2 text-white bottom-0 z-20 pointer-events-none">
                             <h2 className="text-2xl md:text-4xl">{a.title}</h2>
                             <p className="md:text-lg">

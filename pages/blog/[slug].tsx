@@ -131,7 +131,7 @@ export const BlogPostPage: NextPage<{
                 </div>
             </InfoBlock>
 
-            <InfoBlock>
+            <InfoBlock className="gap-6">
                 <InfoBlockTitle className="text-gradient-blue-purple pb-2">Related Posts</InfoBlockTitle>
                 <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                     {additionalBlogPosts.map((b, i) => (
