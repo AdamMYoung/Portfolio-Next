@@ -41,7 +41,7 @@ export type Album = {
 };
 
 export type AlbumDetail = Album & {
-    imageUrls: Image[];
+    images: Image[];
 };
 
 export type Image = {
@@ -69,13 +69,6 @@ interface IContentRepository {
 
 const albumSizeSort = (a: contentful.Entry<ContentfulAlbum>, b: contentful.Entry<ContentfulAlbum>) => {
     return b.fields.images.length - a.fields.images.length;
-};
-
-const imageAspectRatioSort = (a: contentful.Asset, b: contentful.Asset) => {
-    const aDims = a.fields.file.details.image;
-    const bDims = b.fields.file.details.image;
-
-    return bDims!.height / bDims!.width - aDims!.height / aDims!.width;
 };
 
 class ContentfulRepository implements IContentRepository {
@@ -130,7 +123,7 @@ class ContentfulRepository implements IContentRepository {
                 width: details.image!.width,
             },
             count: images.length,
-            imageUrls: images.sort(imageAspectRatioSort).map((i) => {
+            images: images.map((i) => {
                 const { url, details } = i.fields.file;
                 return {
                     url: `https:${url}`,
