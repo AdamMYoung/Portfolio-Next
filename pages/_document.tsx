@@ -4,7 +4,7 @@ import Script from "next/script";
 
 const Document: NextPage = () => {
     return (
-        <Html>
+        <Html lang="en-gb">
             <Head>
                 <script
                     async
