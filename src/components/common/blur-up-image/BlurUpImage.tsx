@@ -12,10 +12,10 @@ type BlurUpImageProps = ImageProps & {
 export const BlurUpImage = ({ blurhash, className, alt, ...rest }: BlurUpImageProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const _className = clsx("relative transition-all", isLoaded ? "blur-none z-[2]" : "blur-3xl z-0", className);
+    const _className = clsx("relative ", isLoaded ? "blur-none z-[2]" : "blur-3xl z-0", className);
 
     return (
-        <div className="relative block overflow-hidden ">
+        <div className="relative block overflow-hidden transition-all">
             {isProd && (
                 <BlurhashCanvas
                     {...blurhash}
@@ -32,7 +32,12 @@ export const BlurUpImage = ({ blurhash, className, alt, ...rest }: BlurUpImagePr
                     }}
                 />
             )}
-            <Image className={_className} onLoadingComplete={() => setIsLoaded(true)} alt={alt} {...rest} />
+            <Image
+                className={_className}
+                onLoadingComplete={() => setTimeout(() => setIsLoaded(true), 500)}
+                alt={alt}
+                {...rest}
+            />
         </div>
     );
 };
