@@ -10,7 +10,7 @@ import Link from "next/link";
 import { SEO } from "../../src/components/meta/SEO";
 
 import { Album, getContentRepository } from "../../src/utils/content";
-import Image from "next/image";
+import Image from "next/future/image";
 
 type PhotographyProps = {
     albums: Album[];
@@ -21,13 +21,12 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
         <InfoBlock>
             <div className="max-w-3xl grid gap-2">
                 {albums.map((a) => (
-                    <article key={a.slug} className="relative w-full">
+                    <article key={a.slug} className="group relative w-full">
                         <Image
                             src={a.cover.url}
                             alt={a.title}
-                            className="rounded"
-                            objectFit="cover"
-                            layout="responsive"
+                            className="rounded object-cover"
+                            sizes="100vw"
                             height={a.cover.height}
                             width={a.cover.width}
                         />
@@ -35,7 +34,9 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
                             <a className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10" />
                         </Link>
                         <div className="absolute p-8 grid gap-2 text-white bottom-0 z-20 pointer-events-none">
-                            <h2 className="text-2xl md:text-4xl">{a.title}</h2>
+                            <h2 className="text-2xl md:text-4xl text-white group-hover:text-gradient-orange-blue">
+                                {a.title}
+                            </h2>
                             <p className="md:text-lg">
                                 {a.count} image{a.count > 1 && "s"}
                             </p>

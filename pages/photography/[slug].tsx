@@ -1,18 +1,18 @@
-import React, { FC, useMemo } from "react";
-import { DownIndicator } from "../../src/components/common/down-indicator";
-
-import { Hero, HeroText, HeroTextBlock } from "../../src/components/sections/hero";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import React, { FC, useMemo } from "react";
+import Image from "next/future/image";
+import { BiDownload } from "react-icons/bi";
+import Link from "next/link";
+import { createBreakpoint } from "react-use";
+
+import { DownIndicator } from "../../src/components/common/down-indicator";
+import { Hero, HeroText, HeroTextBlock } from "../../src/components/sections/hero";
 
 import { Layout } from "../../src/components/layout";
 import { InfoBlock } from "../../src/components/sections/info-block";
-import Link from "next/link";
 import { SEO } from "../../src/components/meta/SEO";
-import { BiDownload } from "react-icons/bi";
 
 import { AlbumDetail, getContentRepository, Image as ImageType } from "../../src/utils/content";
-import Image from "next/image";
-import { createBreakpoint } from "react-use";
 
 const useBreakpoint = createBreakpoint({ lg: 1024, md: 768 });
 
@@ -72,14 +72,15 @@ const ImageList: FC<{ album: AlbumDetail }> = ({ album }) => {
                             <Image
                                 src={image.url}
                                 alt=""
-                                className="rounded"
-                                layout="responsive"
+                                className="rounded max-w-full h-auto"
                                 width={image.width}
                                 height={image.height}
+                                placeholder="blur"
+                                blurDataURL={`${image.url}&q=10`}
                             />
                             <div className="absolute bottom-12 md:bottom-0 right-0">
                                 <button
-                                    className="absolute md:bottom-4 right-4 translate-all hover:shadow-md hover:bg-slate-200 bg-white rounded p-1"
+                                    className="absolute md:bottom-4 right-4 transition-all hover:shadow-md hover:bg-slate-400 bg-white rounded p-1"
                                     onClick={() => handleDownloadClick(image.url)}
                                 >
                                     <BiDownload color="black" className="h-6 w-6" />
@@ -98,7 +99,7 @@ const AlbumContent: NextPage<PhotographyProps> = ({ album }) => {
         <Layout>
             <SEO
                 title={`Photography - ${album.title}`}
-                description={`Album of ${album.title} photography I've taken`}
+                description={`An album of ${album.title} photography`}
                 canonical={`/photography/${album.slug}`}
             />
             <Hero>
@@ -106,7 +107,7 @@ const AlbumContent: NextPage<PhotographyProps> = ({ album }) => {
                     <Link href="/photography" passHref>
                         <a className="hover:underline">{"< Back"}</a>
                     </Link>
-                    <HeroText className="text-gradient-blue-purple pb-2">Album - {album.title}</HeroText>
+                    <HeroText className="text-gradient-blue-purple pb-2">{album.title}</HeroText>
                     <DownIndicator />
                 </HeroTextBlock>
             </Hero>
