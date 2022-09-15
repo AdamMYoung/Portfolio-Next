@@ -13,6 +13,7 @@ import { InfoBlock } from "../../src/components/sections/info-block";
 import { SEO } from "../../src/components/meta/SEO";
 
 import { AlbumDetail, getContentRepository, Image as ImageType } from "../../src/utils/content";
+import { isProd } from "../../src/utils/platform";
 
 const useBreakpoint = createBreakpoint({ lg: 1024, md: 768 });
 
@@ -75,8 +76,8 @@ const ImageList: FC<{ album: AlbumDetail }> = ({ album }) => {
                                 className="rounded max-w-full h-auto"
                                 width={image.width}
                                 height={image.height}
-                                placeholder="blur"
-                                blurDataURL={`${image.url}&q=10`}
+                                placeholder={isProd ? "blur" : "empty"}
+                                blurDataURL={image.placeholderBase64}
                             />
                             <div className="absolute bottom-12 md:bottom-0 right-0">
                                 <button

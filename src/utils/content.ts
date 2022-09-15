@@ -1,4 +1,6 @@
 import * as contentful from "contentful";
+import { getPlaiceholder } from "plaiceholder";
+import { isProd } from "./platform";
 
 type ContentfulBlogPost = {
     title: string;
@@ -46,6 +48,7 @@ export type AlbumDetail = Album & {
 
 export type Image = {
     url: string;
+    placeholderBase64: string;
     height: number;
     width: number;
 };
@@ -67,8 +70,8 @@ interface IContentRepository {
     getAlbum(slug: string, options?: QueryOptions): Promise<AlbumDetail>;
 }
 
-const albumSizeSort = (a: contentful.Entry<ContentfulAlbum>, b: contentful.Entry<ContentfulAlbum>) => {
-    return b.fields.images.length - a.fields.images.length;
+const albumSizeSort = (a: Album, b: Album) => {
+    return b.count - a.count;
 };
 
 class ContentfulRepository implements IContentRepository {
@@ -87,21 +90,31 @@ class ContentfulRepository implements IContentRepository {
             ...options,
         });
 
-        return albums.items.sort(albumSizeSort).map((i) => {
-            const { name, slug, cover, images } = i.fields;
+        const items: Album[] = [];
+
+        for (let i = 0; i < albums.items.length; i++) {
+            const currentItem = albums.items[i];
+
+            const { name, slug, cover, images } = currentItem.fields;
             const { url, details } = cover.fields.file;
 
-            return {
+            const configuredUrl = `https:${url}?fm=webp`;
+            const { base64 } = isProd ? await getPlaiceholder(configuredUrl) : { base64: "" };
+
+            items.push({
                 title: name,
                 slug,
                 cover: {
-                    url: `https:${url}?fm=webp`,
+                    url: configuredUrl,
                     height: details.image!.height,
                     width: details.image!.width,
+                    placeholderBase64: base64,
                 },
                 count: images.length,
-            };
-        });
+            });
+        }
+
+        return items.sort(albumSizeSort);
     }
     async getAlbum(slug: string, options?: QueryOptions | undefined): Promise<AlbumDetail> {
         const albums = await this._client.getEntries<ContentfulAlbum>({
@@ -111,26 +124,42 @@ class ContentfulRepository implements IContentRepository {
             ...options,
         });
 
+        const parsedImages: Image[] = [];
+
         const { name, cover, images } = albums.items[0].fields;
         const { url, details } = cover.fields.file;
+
+        const configuredUrl = `https:${url}?fm=webp`;
+        const { base64: coverBase64 } = isProd ? await getPlaiceholder(configuredUrl) : { base64: "" };
+
+        // Parse inner images
+        for (let i = 0; i < images.length; i++) {
+            const currentImage = images[i];
+
+            const { url, details } = currentImage.fields.file;
+
+            const currentImageConfiguredUrl = `https:${url}?fm=webp`;
+            const { base64 } = isProd ? await getPlaiceholder(currentImageConfiguredUrl) : { base64: "" };
+
+            parsedImages.push({
+                url: currentImageConfiguredUrl,
+                height: details.image!.height,
+                width: details.image!.width,
+                placeholderBase64: base64,
+            });
+        }
 
         return {
             title: name,
             slug,
             cover: {
-                url: `https:${url}?fm=webp`,
+                url: configuredUrl,
                 height: details.image!.height,
                 width: details.image!.width,
+                placeholderBase64: coverBase64,
             },
             count: images.length,
-            images: images.map((i) => {
-                const { url, details } = i.fields.file;
-                return {
-                    url: `https:${url}?fm=webp`,
-                    height: details.image!.height,
-                    width: details.image!.width,
-                };
-            }),
+            images: parsedImages,
         };
     }
     async getBlogs(options?: QueryOptions): Promise<BlogPost[]> {

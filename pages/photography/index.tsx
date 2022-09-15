@@ -11,6 +11,7 @@ import { SEO } from "../../src/components/meta/SEO";
 
 import { Album, getContentRepository } from "../../src/utils/content";
 import Image from "next/future/image";
+import { isProd } from "../../src/utils/platform";
 
 type PhotographyProps = {
     albums: Album[];
@@ -29,6 +30,8 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
                             sizes="100vw"
                             height={a.cover.height}
                             width={a.cover.width}
+                            placeholder={isProd ? "blur" : "empty"}
+                            blurDataURL={a.cover.placeholderBase64}
                         />
                         <Link passHref href={`/photography/${a.slug}`}>
                             <a className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10" />
