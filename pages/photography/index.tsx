@@ -11,6 +11,8 @@ import { SEO } from "../../src/components/meta/SEO";
 
 import { Album, getContentRepository } from "../../src/utils/content";
 import Image from "next/future/image";
+import { BlurhashCanvas } from "react-blurhash";
+import { IGetBlurhashReturn } from "plaiceholder/dist/blurhash";
 import { isProd } from "../../src/utils/platform";
 
 type PhotographyProps = {
@@ -23,16 +25,31 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
             <div className="max-w-3xl grid gap-2">
                 {albums.map((a) => (
                     <article key={a.slug} className="group relative w-full">
-                        <Image
-                            src={a.cover.url}
-                            alt={a.title}
-                            className="rounded object-cover"
-                            sizes="100vw"
-                            height={a.cover.height}
-                            width={a.cover.width}
-                            placeholder={isProd ? "blur" : "empty"}
-                            blurDataURL={a.cover.placeholderBase64}
-                        />
+                        <div className="relative block overflow-hidden">
+                            {isProd && (
+                                <BlurhashCanvas
+                                    {...(a.cover.placeholderBlurhash as IGetBlurhashReturn)}
+                                    punch={1}
+                                    style={{
+                                        position: "absolute",
+                                        top: 0,
+                                        right: 0,
+                                        bottom: 0,
+                                        left: 0,
+                                        width: "100%",
+                                        height: "100%",
+                                    }}
+                                />
+                            )}
+                            <Image
+                                src={a.cover.url}
+                                alt={a.title}
+                                className="rounded object-cover"
+                                sizes="100vw"
+                                height={a.cover.height}
+                                width={a.cover.width}
+                            />
+                        </div>
                         <Link passHref href={`/photography/${a.slug}`}>
                             <a className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10" />
                         </Link>

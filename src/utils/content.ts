@@ -1,5 +1,6 @@
 import * as contentful from "contentful";
 import { getPlaiceholder } from "plaiceholder";
+import { IGetBlurhashReturn } from "plaiceholder/dist/blurhash";
 import { isProd } from "./platform";
 
 type ContentfulBlogPost = {
@@ -48,7 +49,7 @@ export type AlbumDetail = Album & {
 
 export type Image = {
     url: string;
-    placeholderBase64: string;
+    placeholderBlurhash: string | IGetBlurhashReturn;
     height: number;
     width: number;
 };
@@ -99,7 +100,7 @@ class ContentfulRepository implements IContentRepository {
             const { url, details } = cover.fields.file;
 
             const configuredUrl = `https:${url}?fm=webp`;
-            const { base64 } = isProd ? await getPlaiceholder(configuredUrl) : { base64: "" };
+            const { blurhash } = isProd ? await getPlaiceholder(configuredUrl) : { blurhash: "" };
 
             items.push({
                 title: name,
@@ -108,7 +109,7 @@ class ContentfulRepository implements IContentRepository {
                     url: configuredUrl,
                     height: details.image!.height,
                     width: details.image!.width,
-                    placeholderBase64: base64,
+                    placeholderBlurhash: blurhash,
                 },
                 count: images.length,
             });
@@ -130,7 +131,7 @@ class ContentfulRepository implements IContentRepository {
         const { url, details } = cover.fields.file;
 
         const configuredUrl = `https:${url}?fm=webp`;
-        const { base64: coverBase64 } = isProd ? await getPlaiceholder(configuredUrl) : { base64: "" };
+        const { blurhash: coverBlurhash } = isProd ? await getPlaiceholder(configuredUrl) : { blurhash: "" };
 
         // Parse inner images
         for (let i = 0; i < images.length; i++) {
@@ -139,13 +140,13 @@ class ContentfulRepository implements IContentRepository {
             const { url, details } = currentImage.fields.file;
 
             const currentImageConfiguredUrl = `https:${url}?fm=webp`;
-            const { base64 } = isProd ? await getPlaiceholder(currentImageConfiguredUrl) : { base64: "" };
+            const { blurhash } = isProd ? await getPlaiceholder(currentImageConfiguredUrl) : { blurhash: "" };
 
             parsedImages.push({
                 url: currentImageConfiguredUrl,
                 height: details.image!.height,
                 width: details.image!.width,
-                placeholderBase64: base64,
+                placeholderBlurhash: blurhash,
             });
         }
 
@@ -156,7 +157,7 @@ class ContentfulRepository implements IContentRepository {
                 url: configuredUrl,
                 height: details.image!.height,
                 width: details.image!.width,
-                placeholderBase64: coverBase64,
+                placeholderBlurhash: coverBlurhash,
             },
             count: images.length,
             images: parsedImages,

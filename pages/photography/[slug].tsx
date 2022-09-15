@@ -13,6 +13,8 @@ import { InfoBlock } from "../../src/components/sections/info-block";
 import { SEO } from "../../src/components/meta/SEO";
 
 import { AlbumDetail, getContentRepository, Image as ImageType } from "../../src/utils/content";
+import { BlurhashCanvas } from "react-blurhash";
+import { IGetBlurhashReturn } from "plaiceholder/dist/blurhash";
 import { isProd } from "../../src/utils/platform";
 
 const useBreakpoint = createBreakpoint({ lg: 1024, md: 768 });
@@ -70,15 +72,30 @@ const ImageList: FC<{ album: AlbumDetail }> = ({ album }) => {
                 <div key={index} className="flex flex-col gap-3">
                     {list.map((image) => (
                         <div key={index + image.url} className="relative w-full h-fit">
-                            <Image
-                                src={image.url}
-                                alt=""
-                                className="rounded max-w-full h-auto"
-                                width={image.width}
-                                height={image.height}
-                                placeholder={isProd ? "blur" : "empty"}
-                                blurDataURL={image.placeholderBase64}
-                            />
+                            <div>
+                                {isProd && (
+                                    <BlurhashCanvas
+                                        {...(image.placeholderBlurhash as IGetBlurhashReturn)}
+                                        punch={1}
+                                        style={{
+                                            position: "absolute",
+                                            top: 0,
+                                            right: 0,
+                                            bottom: 0,
+                                            left: 0,
+                                            width: "100%",
+                                            height: "100%",
+                                        }}
+                                    />
+                                )}
+                                <Image
+                                    src={image.url}
+                                    alt=""
+                                    className="rounded max-w-full h-auto"
+                                    width={image.width}
+                                    height={image.height}
+                                />
+                            </div>
                             <div className="absolute bottom-12 md:bottom-0 right-0">
                                 <button
                                     className="absolute md:bottom-4 right-4 transition-all hover:shadow-md hover:bg-slate-400 bg-white rounded p-1"
