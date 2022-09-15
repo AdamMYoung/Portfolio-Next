@@ -31,7 +31,12 @@ export const BlurUpImage = ({ blurhash, className, alt, ...rest }: BlurUpImagePr
                     }}
                 />
             )}
-            <Image className={clsx("relative", className)} alt={alt} onLoadedData={() => setIsLoaded(true)} {...rest} />
+            <Image
+                className={clsx("relative", isLoaded && "z-[2]", className)}
+                alt={alt}
+                onLoadedData={() => setIsLoaded(true)}
+                {...rest}
+            />
         </div>
     );
 };
