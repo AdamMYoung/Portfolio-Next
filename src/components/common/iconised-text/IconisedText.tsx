@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import { ComponentPropsWithoutRef, FC } from "react";
-import { FCCTag } from "../../../types";
 
 type IconisedTextProps = ComponentPropsWithoutRef<"span"> & {
     src: StaticImageData;

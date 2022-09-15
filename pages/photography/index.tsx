@@ -10,7 +10,7 @@ import Link from "next/link";
 import { SEO } from "../../src/components/meta/SEO";
 
 import { Album, getContentRepository } from "../../src/utils/content";
-import Image from "next/image";
+import Image from "next/future/image";
 
 type PhotographyProps = {
     albums: Album[];
@@ -25,9 +25,8 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
                         <Image
                             src={a.cover.url}
                             alt={a.title}
-                            className="rounded"
-                            objectFit="cover"
-                            layout="responsive"
+                            className="rounded object-cover"
+                            sizes="100vw"
                             height={a.cover.height}
                             width={a.cover.width}
                         />
