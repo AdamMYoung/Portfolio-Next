@@ -95,7 +95,7 @@ class ContentfulRepository implements IContentRepository {
                 title: name,
                 slug,
                 cover: {
-                    url: `https:${url}`,
+                    url: `https:${url}?fm=webp`,
                     height: details.image!.height,
                     width: details.image!.width,
                 },
@@ -118,7 +118,7 @@ class ContentfulRepository implements IContentRepository {
             title: name,
             slug,
             cover: {
-                url: `https:${url}`,
+                url: `https:${url}?fm=webp`,
                 height: details.image!.height,
                 width: details.image!.width,
             },
@@ -126,7 +126,7 @@ class ContentfulRepository implements IContentRepository {
             images: images.map((i) => {
                 const { url, details } = i.fields.file;
                 return {
-                    url: `https:${url}`,
+                    url: `https:${url}?fm=webp`,
                     height: details.image!.height,
                     width: details.image!.width,
                 };
@@ -145,7 +145,7 @@ class ContentfulRepository implements IContentRepository {
             return {
                 title,
                 slug,
-                heroImageUrl: `https:${heroImage.fields.file.url}`,
+                heroImageUrl: `https:${heroImage.fields.file.url}?fm=webp`,
                 topics,
                 summary,
                 copy,

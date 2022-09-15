@@ -22,32 +22,31 @@
     .text-gradient-darkblue-blue {
         @apply bg-gradient-to-r text-transparent bg-clip-text from-blue-800 to-blue-500;
     }
+
+    .min-h-half-screen {
+        height: 50vh;
+    }
+
+    .min-w-half-screen {
+        min-width: 50vw;
+    }
+
+    .min-w-75vw {
+        min-width: 75vw;
+    }
+
+    .code-box {
+        display: block;
+        overflow: hidden;
+        overflow-x: auto;
+        max-width: 90vw;
+    }
+
+    .code-box > code {
+        width: 100%;
+        word-break: break-all;
+        border-radius: 4px;
+    }
 }
 
-.min-h-half-screen {
-    height: 50vh;
-}
 
-.min-w-half-screen {
-    min-width: 50vw;
-}
-
-.min-w-75vw {
-    min-width: 75vw;
-}
-
-.code-box {
-    display: block;
-    overflow: hidden;
-    overflow-x: auto;
-    max-width: 90vw;
-}
-
-.code-box > code {
-    width: 100%;
-    word-break: break-all;
-    border-radius: 4px;
-}
-
-a {
-}

@@ -31,15 +31,7 @@ const HomeHero = () => {
                     Hi, I&apos;m <span className="text-gradient-blue-purple">Adam Young</span>!
                 </HeroText>
                 <HeroText className="leading-12 ">
-                    I&apos;m a <span className="text-gradient-yellow-green">Software Engineer</span> working at{" "}
-                    <a
-                        href="https://checkout.com"
-                        rel="noreferrer"
-                        target="_blank"
-                        className="text-gradient-darkblue-blue underline"
-                    >
-                        Checkout.com
-                    </a>
+                    I&apos;m a <a href="https://www.checkout.com" target="_blank" rel="noreferrer" className="text-gradient-yellow-green transition-all hover:brightness-200">Software Engineer</a>, <Link href="/photography" passHref><a className="text-gradient-orange-blue transition-all hover:brightness-200">Photographer</a></Link>, and <Link href="/blog" passHref><a className="text-gradient-purple-blue transition-all hover:brightness-200">Occasional Blogger</a></Link>.
                 </HeroText>
                 <DownIndicator />
             </HeroTextBlock>
@@ -47,54 +39,14 @@ const HomeHero = () => {
     );
 };
 
-const HomeAboutMe = () => {
-    const yearsExperience = new Date().getFullYear() - 2019;
-
-    return (
-        <FadeIn>
-            <InfoBlock className="gap-6">
-                <InfoBlockTitle className="text-gradient-orange-blue">About Me</InfoBlockTitle>
-                <InfoBlockDescription>
-                    I have {yearsExperience} years experience in{" "}
-                    <span className="text-gradient-yellow-green brightness-150">
-                        full-stack software design and development
-                    </span>
-                    , with a huge focus on the web using <span className="text-blue-500">React</span>,{" "}
-                    <span className="text-red-500">Next.js</span>, and whatever&apos;s 🔥 at the moment.
-                </InfoBlockDescription>
-                <InfoBlockDescription>
-                    I try to make everything I build <FireText>blazing fast</FireText> and accessible, and I&apos;m
-                    always looking for ways to improve 📚. There&apos;s usually a project in-progress, some past
-                    examples being{" "}
-                    <a className="underline" href="https://blurdle.aydev.uk" target="_blank">
-                        Blurdle
-                    </a>{" "}
-                    or{" "}
-                    <a className="underline" href="https://ebay-heuristics-v2.netlify.app/" target="_blank">
-                        eBay Heuristics
-                    </a>
-                    .
-                </InfoBlockDescription>
-                <InfoBlockDescription>
-                    I also do photography in my spare time;{" "}
-                    <Link passHref href="/photography">
-                        <a className="underline">a collection of my work can be found here</a>
-                    </Link>
-                    .
-                </InfoBlockDescription>
-            </InfoBlock>
-        </FadeIn>
-    );
-};
-
 const HomeBlog: FC<{ blogPosts: BlogPost[] }> = ({ blogPosts }) => {
     return (
         <FadeIn>
             <InfoBlock>
-                <InfoBlockLinkTitle href="/blog" className="text-gradient-blue-purple pb-2">
-                    Tech Blog
+                <InfoBlockLinkTitle href="/blog" className="pb-2">
+                    <span className="text-gradient-blue-purple  transition-all hover:brightness-200">Tech Blog</span>
                 </InfoBlockLinkTitle>
-                <div className="snap-x flex md:snap-none overflow-hidden overflow-x-auto md:overflow-auto md:overflow-x-auto md:grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <div className="snap-x flex mt-8 md:snap-none overflow-hidden overflow-x-auto md:overflow-auto md:overflow-x-auto md:grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                     {blogPosts.map((b, i) => (
                         <div className="min-w-75vw md:min-w-0 md:w-auto" key={b.slug}>
                             <BlogCard blog={b} color={getHoverColorFromNumber(i)} />
@@ -115,8 +67,6 @@ const Home: NextPage<HomeProps> = ({ blogPosts }) => {
                 canonical="/"
             />
             <HomeHero />
-            <HomeAboutMe />
-
             <HomeBlog blogPosts={blogPosts} />
         </Layout>
     );
