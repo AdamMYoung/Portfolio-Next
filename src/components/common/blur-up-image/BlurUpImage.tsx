@@ -25,7 +25,6 @@ export const BlurUpImage = ({ blurhash, className, alt, ...rest }: BlurUpImagePr
                         right: 0,
                         bottom: 0,
                         left: 0,
-                        zIndex: 1,
                         width: "100%",
                         height: "100%",
                     }}
