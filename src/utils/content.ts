@@ -49,7 +49,7 @@ export type AlbumDetail = Album & {
 
 export type Image = {
     url: string;
-    placeholderBlurhash: string | IGetBlurhashReturn;
+    placeholderBlurhash: IGetBlurhashReturn;
     height: number;
     width: number;
 };
@@ -100,7 +100,7 @@ class ContentfulRepository implements IContentRepository {
             const { url, details } = cover.fields.file;
 
             const configuredUrl = `https:${url}?fm=webp`;
-            const { blurhash } = isProd ? await getPlaiceholder(configuredUrl) : { blurhash: "" };
+            const { blurhash } = isProd ? await getPlaiceholder(configuredUrl) : { blurhash: {} as IGetBlurhashReturn };
 
             items.push({
                 title: name,
@@ -131,7 +131,9 @@ class ContentfulRepository implements IContentRepository {
         const { url, details } = cover.fields.file;
 
         const configuredUrl = `https:${url}?fm=webp`;
-        const { blurhash: coverBlurhash } = isProd ? await getPlaiceholder(configuredUrl) : { blurhash: "" };
+        const { blurhash: coverBlurhash } = isProd
+            ? await getPlaiceholder(configuredUrl)
+            : { blurhash: {} as IGetBlurhashReturn };
 
         // Parse inner images
         for (let i = 0; i < images.length; i++) {
@@ -140,7 +142,9 @@ class ContentfulRepository implements IContentRepository {
             const { url, details } = currentImage.fields.file;
 
             const currentImageConfiguredUrl = `https:${url}?fm=webp`;
-            const { blurhash } = isProd ? await getPlaiceholder(currentImageConfiguredUrl) : { blurhash: "" };
+            const { blurhash } = isProd
+                ? await getPlaiceholder(currentImageConfiguredUrl)
+                : { blurhash: {} as IGetBlurhashReturn };
 
             parsedImages.push({
                 url: currentImageConfiguredUrl,
