@@ -7,7 +7,7 @@ type BlurUpImageProps = ImageProps & {
     blurhash: IGetBlurhashReturn;
 };
 
-export const BlurUpImage = ({ blurhash, ...rest }: BlurUpImageProps) => {
+export const BlurUpImage = ({ blurhash, className, ...rest }: BlurUpImageProps) => {
     return (
         <div className="relative block overflow-hidden">
             {isProd && (
@@ -25,7 +25,7 @@ export const BlurUpImage = ({ blurhash, ...rest }: BlurUpImageProps) => {
                     }}
                 />
             )}
-            <Image {...rest} alt="" />
+            <Image {...rest} className={`${className} relative z-[1]`} alt="" />
         </div>
     );
 };
