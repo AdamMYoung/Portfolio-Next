@@ -12,7 +12,7 @@ type BlurUpImageProps = ImageProps & {
 export const BlurUpImage = ({ blurhash, className, alt, ...rest }: BlurUpImageProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const _className = clsx("relative z-[1] transition-all", isLoaded ? "blur(0)" : "blur(1.5rem)", className);
+    const _className = clsx("relative  transition-all", isLoaded ? "blur(0) z-[2]" : "blur(1.5rem) z-0", className);
 
     return (
         <div className="relative block overflow-hidden">
@@ -26,6 +26,7 @@ export const BlurUpImage = ({ blurhash, className, alt, ...rest }: BlurUpImagePr
                         right: 0,
                         bottom: 0,
                         left: 0,
+                        zIndex: 1,
                         width: "100%",
                         height: "100%",
                     }}
