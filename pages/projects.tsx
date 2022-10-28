@@ -65,8 +65,8 @@ const Projects: NextPage<ProjectsProps> = ({ projects }) => {
             />
             <Hero>
                 <HeroTextBlock>
-                    <Link href="/" passHref>
-                        <a className="hover:underline">{"< Home"}</a>
+                    <Link href="/" className="hover:underline">
+                        {"< Home"}
                     </Link>
                     <HeroText className="text-gradient-blue-purple pb-2">Projects</HeroText>
                     <DownIndicator />

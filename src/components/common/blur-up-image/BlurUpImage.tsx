@@ -1,6 +1,7 @@
 import { BlurhashCanvas } from "react-blurhash";
 import { IGetBlurhashReturn } from "plaiceholder/dist/blurhash";
-import Image, { ImageProps } from "next/future/image";
+import Image, { ImageProps } from "next/image";
+
 import { isProd } from "../../../utils/platform";
 import clsx from "clsx";
 import { useState } from "react";

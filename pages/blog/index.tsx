@@ -24,8 +24,8 @@ export const Blog: NextPage<BlogProps> = ({ blogPosts }) => {
             />
             <Hero>
                 <HeroTextBlock>
-                    <Link href="/" passHref>
-                        <a className="hover:underline">{"< Home"}</a>
+                    <Link href="/" className="hover:underline">
+                       {"< Home"}
                     </Link>
                     <HeroText className="text-gradient-blue-purple pb-2">Tech Blog</HeroText>
                     <DownIndicator />

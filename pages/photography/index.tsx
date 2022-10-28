@@ -10,10 +10,6 @@ import Link from "next/link";
 import { SEO } from "../../src/components/meta/SEO";
 
 import { Album, getContentRepository } from "../../src/utils/content";
-import Image from "next/future/image";
-import { BlurhashCanvas } from "react-blurhash";
-import { IGetBlurhashReturn } from "plaiceholder/dist/blurhash";
-import { isProd } from "../../src/utils/platform";
 import { BlurUpImage } from "../../src/components/common/blur-up-image";
 
 type PhotographyProps = {
@@ -36,9 +32,10 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
                             width={a.cover.width}
                         />
 
-                        <Link passHref href={`/photography/${a.slug}`}>
-                            <a className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10" />
-                        </Link>
+                        <Link
+                            href={`/photography/${a.slug}`}
+                            className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10"
+                        />
                         <div className="absolute p-8 grid gap-2 text-white bottom-0 z-20 pointer-events-none">
                             <h2 className="text-2xl md:text-4xl text-white group-hover:text-gradient-orange-blue">
                                 {a.title}
@@ -60,8 +57,8 @@ const Photography: NextPage<PhotographyProps> = ({ albums }) => {
             <SEO title="Photography" description="Albums of the various photos I've taken" canonical="/photography/" />
             <Hero>
                 <HeroTextBlock>
-                    <Link href="/" passHref>
-                        <a className="hover:underline">{"< Home"}</a>
+                    <Link href="/" className="hover:underline">
+                        {"< Home"}
                     </Link>
                     <HeroText className="text-gradient-blue-purple pb-2">Photography</HeroText>
                     <DownIndicator />

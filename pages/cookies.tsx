@@ -15,8 +15,8 @@ const Cookies = () => {
             />
             <Hero>
                 <HeroTextBlock>
-                    <Link href="/" passHref>
-                        <a className="hover:underline">{"< Home"}</a>
+                    <Link href="/" className="hover:underline">
+                        {"< Home"}
                     </Link>
                     <div className="grid gap-4 ">
                         <h1 className="text-3xl">Disabling Cookies</h1>

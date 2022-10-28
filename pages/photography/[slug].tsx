@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React, { FC, useMemo } from "react";
-import Image from "next/future/image";
 import { BiDownload } from "react-icons/bi";
 import Link from "next/link";
 import { createBreakpoint } from "react-use";
@@ -105,8 +104,8 @@ const AlbumContent: NextPage<PhotographyProps> = ({ album }) => {
             />
             <Hero>
                 <HeroTextBlock>
-                    <Link href="/photography" passHref>
-                        <a className="hover:underline">{"< Back"}</a>
+                    <Link href="/photography" className="hover:underline">
+                       {"< Back"}
                     </Link>
                     <HeroText className="text-gradient-blue-purple pb-2">{album.title}</HeroText>
                     <DownIndicator />

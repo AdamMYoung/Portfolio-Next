@@ -39,14 +39,14 @@ export const Layout: FCC = ({ children }) => {
                         <div className="">
                             <p className="text-xl font-semibold">Quick Links</p>
                             <div className="mt-2">
-                                <Link passHref href="/">
-                                    <a className="block">Home</a>
+                                <Link href="/" className="block">
+                                    Home
                                 </Link>
-                                <Link passHref href="/blog">
-                                    <a className="block">Blog</a>
+                                <Link href="/blog" className="block">
+                                    Blog
                                 </Link>
-                                <Link passHref href="/cookies">
-                                    <a className="block">Cookies</a>
+                                <Link href="/cookies" className="block">
+                                    Cookies
                                 </Link>
                             </div>
                         </div>
@@ -55,11 +55,11 @@ export const Layout: FCC = ({ children }) => {
                         <div>
                             <p className="text-xl font-semibold">My Stuff</p>
                             <div className="mt-2">
-                                <Link passHref href="/projects">
-                                    <a className="block">Projects</a>
+                                <Link href="/projects" className="block">
+                                    Projects
                                 </Link>
-                                <Link passHref href="/photography">
-                                    <a className="block">Photography</a>
+                                <Link href="/photography" className="block">
+                                    Photography
                                 </Link>
                             </div>
                         </div>

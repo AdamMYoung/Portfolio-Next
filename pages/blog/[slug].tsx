@@ -115,8 +115,8 @@ export const BlogPostPage: NextPage<{
             </SEO>
             <Hero>
                 <HeroTextBlock>
-                    <Link href="/" passHref>
-                        <a className="hover:underline">{"< Home"}</a>
+                    <Link href="/" className="hover:underline">
+                       {"< Home"}
                     </Link>
                     <HeroText className="text-gradient-blue-purple">{title}</HeroText>
                     <p className="leading-12 text-2xl">{summary}</p>

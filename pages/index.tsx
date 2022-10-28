@@ -1,23 +1,16 @@
-/* eslint-disable react/jsx-no-target-blank */
 import { GetStaticProps, NextPage } from "next";
-
 import React, { FC } from "react";
+import Link from "next/link";
+
 import { DownIndicator } from "../src/components/common/down-indicator";
 import { FadeIn } from "../src/components/common/fade-in";
-import { FireText } from "../src/components/common/fire-text";
 import { Hero, HeroText, HeroTextBlock } from "../src/components/sections/hero";
-import {
-    InfoBlock,
-    InfoBlockDescription,
-    InfoBlockLinkTitle,
-    InfoBlockTitle,
-} from "../src/components/sections/info-block";
+import { InfoBlock, InfoBlockLinkTitle } from "../src/components/sections/info-block";
 import { Layout } from "../src/components/layout";
 import { BlogPost, getContentRepository } from "../src/utils/content";
 import { BlogCard } from "../src/components/sections/blog-card";
 import { getHoverColorFromNumber } from "../src/utils/color";
 import { SEO } from "../src/components/meta/SEO";
-import Link from "next/link";
 
 type HomeProps = {
     blogPosts: BlogPost[];
@@ -31,7 +24,24 @@ const HomeHero = () => {
                     Hi, I&apos;m <span className="text-gradient-blue-purple">Adam Young</span>!
                 </HeroText>
                 <HeroText className="leading-12 ">
-                    I&apos;m a <a href="https://www.checkout.com" target="_blank" rel="noreferrer" className="text-gradient-yellow-green transition-all hover:brightness-200">Software Engineer</a>, <Link href="/photography" passHref><a className="text-gradient-orange-blue transition-all hover:brightness-200">Photographer</a></Link>, and <Link href="/blog" passHref><a className="text-gradient-purple-blue transition-all hover:brightness-200">Occasional Blogger</a></Link>.
+                    I&apos;m a{" "}
+                    <a
+                        href="https://www.checkout.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-gradient-yellow-green transition-all hover:brightness-200"
+                    >
+                        Software Engineer
+                    </a>
+                    ,{" "}
+                    <Link href="/photography" className="text-gradient-orange-blue transition-all hover:brightness-200">
+                        Photographer
+                    </Link>
+                    , and{" "}
+                    <Link href="/blog" className="text-gradient-purple-blue transition-all hover:brightness-200">
+                        Occasional Blogger
+                    </Link>
+                    .
                 </HeroText>
                 <DownIndicator />
             </HeroTextBlock>

@@ -22,10 +22,8 @@ export const InfoBlockTitle: FCCTag<"h2"> = ({ children, className, ...rest }) =
 
 export const InfoBlockLinkTitle: FCCTag<"a"> = ({ children, href, className, ...rest }) => {
     return (
-        <Link passHref href={href ?? ""}>
-            <a className={clsx("text-4xl md:text-5xl font-semibold max-w-3xl", className)} {...rest}>
-                {children}
-            </a>
+        <Link href={href ?? ""} className={clsx("text-4xl md:text-5xl font-semibold max-w-3xl", className)}>
+            {children}
         </Link>
     );
 };
