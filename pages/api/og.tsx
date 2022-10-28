@@ -29,7 +29,7 @@ const handler = (req: NextRequest) => {
                 }}
             >
                 <div tw="bg-black flex">
-                    <div tw="flex flex-col md:flex-row w-full p-12 md:items-center justify-between">
+                    <div tw="flex flex-col md:flex-row w-full p-12 gap-12 md:items-center justify-between">
                         <h2 tw="flex flex-col font-bold tracking-tight text-gray-900 text-left">
                             <span tw="text-white text-6xl">{name}</span>
                             <span tw="text-indigo-600 text-5xl">{description}</span>
