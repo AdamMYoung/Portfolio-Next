@@ -11,6 +11,7 @@ import { SEO } from "../../src/components/meta/SEO";
 
 import { Album, getContentRepository } from "../../src/utils/content";
 import { BlurUpImage } from "../../src/components/common/blur-up-image";
+import Image from "next/image";
 
 type PhotographyProps = {
     albums: Album[];
@@ -22,8 +23,7 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
             <div className="max-w-3xl grid gap-2">
                 {albums.map((a) => (
                     <article key={a.slug} className="group relative w-full">
-                        <BlurUpImage
-                            blurhash={a.cover.placeholderBlurhash}
+                        <Image
                             src={a.cover.url}
                             alt={a.title}
                             className="rounded object-cover"
@@ -31,7 +31,6 @@ const AlbumList: FC<{ albums: Album[] }> = ({ albums }) => {
                             height={a.cover.height}
                             width={a.cover.width}
                         />
-
                         <Link
                             href={`/photography/${a.slug}`}
                             className="absolute top-0 bottom-0 left-0 right-0 transition-all bg-black opacity-30 hover:opacity-40 z-10"
