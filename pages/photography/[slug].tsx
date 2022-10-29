@@ -100,12 +100,14 @@ const AlbumContent: NextPage<PhotographyProps> = ({ album }) => {
             <SEO
                 title={`Photography - ${album.title}`}
                 description={`An album of ${album.title} photography`}
+                imageUrl={album.cover.url}
+                imageAlt={album.title}
                 canonical={`/photography/${album.slug}`}
             />
             <Hero>
                 <HeroTextBlock>
                     <Link href="/photography" className="hover:underline">
-                       {"< Back"}
+                        {"< Back"}
                     </Link>
                     <HeroText className="text-gradient-blue-purple pb-2">{album.title}</HeroText>
                     <DownIndicator />
