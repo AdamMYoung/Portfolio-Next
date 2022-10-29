@@ -9,6 +9,10 @@ type SEOProps = {
     imageAlt?: string;
 };
 
+const fixedEncodeURIComponent = (str: string) => {
+    return encodeURIComponent(str).replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`);
+};
+
 export const SEO: FCC<SEOProps> = ({ children, title, description, canonical, imageUrl, imageAlt }) => {
     return (
         <Head>
@@ -22,8 +26,10 @@ export const SEO: FCC<SEOProps> = ({ children, title, description, canonical, im
             <meta property="og:description" content={description} />
             <meta
                 property="og:image"
-                content={`https://aydev.uk/api/og?name=${encodeURI(title)}&description=${encodeURI(description)}${
-                    imageUrl ? `&imageUrl=${encodeURI(imageUrl)}` : ""
+                content={`https://aydev.uk/api/og?name=${fixedEncodeURIComponent(
+                    title
+                )}&description=${fixedEncodeURIComponent(description)}${
+                    imageUrl ? `&imageUrl=${fixedEncodeURIComponent(imageUrl)}` : ""
                 }`}
             />
             {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
