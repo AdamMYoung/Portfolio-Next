@@ -22,9 +22,9 @@ export const SEO: FCC<SEOProps> = ({ children, title, description, canonical, im
             <meta property="og:description" content={description} />
             <meta
                 property="og:image"
-                content={`https://aydev.uk/api/og?name=${title}&description=${description}${
-                    imageUrl ? `&imageUrl=${encodeURIComponent(imageUrl)}` : ""
-                }`}
+                content={`https://aydev.uk/api/og?name=${encodeURIComponent(title)}&description=${encodeURIComponent(
+                    description
+                )}${imageUrl ? `&imageUrl=${encodeURIComponent(imageUrl)}` : ""}`}
             />
             {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
 
