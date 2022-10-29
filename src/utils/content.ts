@@ -99,7 +99,7 @@ class ContentfulRepository implements IContentRepository {
             const { name, slug, cover, images } = currentItem.fields;
             const { url, details } = cover.fields.file;
 
-            const configuredUrl = `https:${url}?fm=webp`;
+            const configuredUrl = `https:${url}`;
             const { blurhash } = isProd ? await getPlaiceholder(configuredUrl) : { blurhash: {} as IGetBlurhashReturn };
 
             items.push({
@@ -130,7 +130,7 @@ class ContentfulRepository implements IContentRepository {
         const { name, cover, images } = albums.items[0].fields;
         const { url, details } = cover.fields.file;
 
-        const configuredUrl = `https:${url}?fm=webp`;
+        const configuredUrl = `https:${url}`;
         const { blurhash: coverBlurhash } = isProd
             ? await getPlaiceholder(configuredUrl)
             : { blurhash: {} as IGetBlurhashReturn };
@@ -141,7 +141,7 @@ class ContentfulRepository implements IContentRepository {
 
             const { url, details } = currentImage.fields.file;
 
-            const currentImageConfiguredUrl = `https:${url}?fm=webp`;
+            const currentImageConfiguredUrl = `https:${url}`;
             const { blurhash } = isProd
                 ? await getPlaiceholder(currentImageConfiguredUrl)
                 : { blurhash: {} as IGetBlurhashReturn };
@@ -179,7 +179,7 @@ class ContentfulRepository implements IContentRepository {
             return {
                 title,
                 slug,
-                heroImageUrl: `https:${heroImage.fields.file.url}?fm=webp`,
+                heroImageUrl: `https:${heroImage.fields.file.url}`,
                 topics,
                 summary,
                 copy,
